@@ -1,11 +1,11 @@
-
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-
+#include "PA9.h"
+	
 int main()
 {
-	std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+	vector<Projectile *> Bullets;
+	vector<Projectile *>::iterator iProjectile;
+
+	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 
 	sf::RenderWindow window(modes[0],"BulletHell",sf::Style::Fullscreen);
 	int resHeight = modes[0].height, resWidth = modes[0].width;
@@ -28,6 +28,21 @@ int main()
 		window.clear();
 		window.draw(player);
 		window.display();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			Projectile *nProj = new Projectile(5.f, sf::Color::White, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, .0001)));
+			Bullets.push_back(nProj);
+		}
+		// Bullet Movement Loop
+		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
+		{
+
+			//gets the velocity of the given projectile and moves it
+			(*iProjectile)->move((*iProjectile)->getVelocity());
+			//if((*iProjectile)->ge)
+		}
+		 
 	}
 
 	return 0;
