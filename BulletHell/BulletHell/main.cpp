@@ -1,5 +1,6 @@
-#include "PA9.h"
-	
+//#include "PA9.h"
+#include "Projectile.h"	
+
 int main()
 {
 	vector<Projectile *> Bullets;
@@ -31,7 +32,7 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			Projectile *nProj = new Projectile(5.f, sf::Color::White, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, .0001)));
+			Projectile *nProj = new Projectile(5.f, sf::Color::White, *(new sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new sf::Vector2f(0, .0001)));
 			Bullets.push_back(nProj);
 		}
 		// Bullet Movement Loop
