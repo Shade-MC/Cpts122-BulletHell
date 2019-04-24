@@ -2,7 +2,7 @@
 //#include "PA9.h"
 #include "downEnemy.h"	
 #include <iostream>
-using std::cout;
+
 #include "PA9.h"
 	
 
@@ -11,11 +11,12 @@ int main()
 	vector<Projectile *> Bullets;
 	vector<Projectile *>::iterator iProjectile;
 	Projectile *pPTemp;
-	int pDelay = 0, dBuffer=20;
+	int pDelay = 0, dBuffer=5;
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+	
 
-	sf::RenderWindow window(modes[0],"BulletHell",sf::Style::Fullscreen);
+	sf::RenderWindow window(modes[0],"BulletHell"/*,sf::Style::Fullscreen*/);
 	sf::Vector2f resolution( modes[0].width,modes[0].height);
 	
 	sf::Texture texture;
@@ -33,6 +34,10 @@ int main()
 	player.setPosition(window.getSize().x / 2, window.getSize().y / 10);
 	player.setScale(.7, .7);
 	window.setFramerateLimit(60);
+
+	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y /2);
+	sf::Vector2f enemySize(player.getLocalBounds().width,player.getLocalBounds().height);
+	downEnemy test(enemyPos, enemySize, resolution);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -42,7 +47,9 @@ int main()
 				window.close();
 		}
 
+
 		window.clear();
+		window.draw(test);
 		window.draw(player);
 		for (iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
 		{
@@ -50,6 +57,8 @@ int main()
 		}
 		window.display();
 		
+		test.updataPos();
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			if (player.getPosition().x > 0)
@@ -59,7 +68,9 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
+
 			if (player.getPosition().x<(window.getSize().x-40))
+
 			{
 				player.move(Vector2f(10, 0.f));
 			}
@@ -73,7 +84,9 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
+
 			if (player.getPosition().y<(window.getSize().y-60))
+
 			{
 				player.move(Vector2f(0.f, 10));
 			}
@@ -84,7 +97,6 @@ int main()
 			Bullets.push_back(nProj);
 			pDelay = 0;
 		}
-		
 		// Bullet Movement Loop
 		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end();)
 		{
@@ -105,8 +117,7 @@ int main()
 		{
 			++pDelay;
 		}
-		
-		 
+
 	}
 
 	return 0;
