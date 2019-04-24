@@ -5,7 +5,8 @@
 class downEnemy : public Enemy {
 public:
 	downEnemy(sf::Vector2f &position, sf::Vector2f & size, sf::Vector2f &resolution) : Enemy(position, size,resolution) {
-		sf::RectangleShape::setPosition(position);
+		setPosition(position);
+		setFillColor(sf::Color::Red);
 		generatePath(position, resolution);
 	}
 	

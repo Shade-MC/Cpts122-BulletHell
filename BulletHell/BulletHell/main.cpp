@@ -2,11 +2,7 @@
 //#include "PA9.h"
 #include "downEnemy.h"	
 #include <iostream>
-<<<<<<< HEAD
 
-=======
-using std::cout;
->>>>>>> 134592870a4a4590807e2a41b80f0b3be3e49cec
 #include "PA9.h"
 	
 
@@ -15,12 +11,12 @@ int main()
 	vector<Projectile *> Bullets;
 	vector<Projectile *>::iterator iProjectile;
 	Projectile *pPTemp;
-	int pDelay = 0, dBuffer=20;
+	int pDelay = 0, dBuffer=5;
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 	
 
-	sf::RenderWindow window(modes[0],"BulletHell",sf::Style::Fullscreen);
+	sf::RenderWindow window(modes[0],"BulletHell"/*,sf::Style::Fullscreen*/);
 	sf::Vector2f resolution( modes[0].width,modes[0].height);
 	
 	sf::Texture texture;
@@ -39,8 +35,8 @@ int main()
 	player.setScale(.7, .7);
 	window.setFramerateLimit(60);
 
-	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y);
-	sf::Vector2f enemySize(window.getSize().x / 50, window.getSize().y / 50);
+	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y /2);
+	sf::Vector2f enemySize(player.getLocalBounds().width,player.getLocalBounds().height);
 	downEnemy test(enemyPos, enemySize, resolution);
 	while (window.isOpen())
 	{
@@ -53,6 +49,7 @@ int main()
 
 
 		window.clear();
+		window.draw(test);
 		window.draw(player);
 		for (iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
 		{
@@ -60,6 +57,7 @@ int main()
 		}
 		window.display();
 		
+		test.updataPos();
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
@@ -119,7 +117,6 @@ int main()
 		{
 			++pDelay;
 		}
-		
 
 	}
 
