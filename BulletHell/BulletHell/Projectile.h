@@ -1,10 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-//#include <vector>
-
-using std::vector;
-
 
 class Projectile : public sf::CircleShape
 {
