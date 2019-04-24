@@ -2,7 +2,11 @@
 //#include "PA9.h"
 #include "downEnemy.h"	
 #include <iostream>
+<<<<<<< HEAD
 
+=======
+using std::cout;
+>>>>>>> 134592870a4a4590807e2a41b80f0b3be3e49cec
 #include "PA9.h"
 	
 
@@ -11,7 +15,7 @@ int main()
 	vector<Projectile *> Bullets;
 	vector<Projectile *>::iterator iProjectile;
 	Projectile *pPTemp;
-
+	int pDelay = 0, dBuffer=20;
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 	
@@ -27,6 +31,9 @@ int main()
 	/*sf::RectangleShape player((*(new sf::Vector2f(window.getSize().x / 12,
 		window.getSize().y / 10)), sf::Color::Red,
 		*(new sf::Vector2f((window.getSize().x / 2), ((window.getSize().y) - (window.getSize().y / 12))))));*/
+
+	Projectile *nProj = new Projectile(5.f, sf::Color::Yellow, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, -10000)));
+	Bullets.push_back(nProj);
 
 	player.setPosition(window.getSize().x / 2, window.getSize().y / 10);
 	player.setScale(.7, .7);
@@ -44,62 +51,76 @@ int main()
 				window.close();
 		}
 
+
+		window.clear();
+		window.draw(player);
+		for (iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
+		{
+			window.draw(**iProjectile);
+		}
+		window.display();
 		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			if (player.getPosition().x > 0)
 			{
-				player.move(Vector2f(-20, 0.f));
+				player.move(Vector2f(-10, 0.f));
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (player.getPosition().x<(window.getSize().x - player.getLocalBounds().width))
+
+			if (player.getPosition().x<(window.getSize().x-40))
+
 			{
-				player.move(Vector2f(20, 0.f));
+				player.move(Vector2f(10, 0.f));
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			if (player.getPosition().y > 0)
 			{
-				player.move(Vector2f(0.f, -20));
+				player.move(Vector2f(0.f, -10));
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (player.getPosition().y<(window.getSize().y- player.getLocalBounds().height))
+
+			if (player.getPosition().y<(window.getSize().y-60))
+
 			{
-				player.move(Vector2f(0.f, 20));
+				player.move(Vector2f(0.f, 10));
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&& pDelay==dBuffer )
 		{
-			Projectile *nProj = new Projectile(5.f, sf::Color::White, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, .0001)));
+			Projectile *nProj = new Projectile(2.f, sf::Color::Yellow, *(new Vector2f(player.getPosition().x+16, player.getPosition().y)), true, *(new Vector2f(0, -12)));
 			Bullets.push_back(nProj);
+			pDelay = 0;
 		}
-
 		// Bullet Movement Loop
-		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
+		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end();)
 		{
-
 			//gets the velocity of the given projectile and moves it
 			(*iProjectile)->move((*iProjectile)->getVelocity());
-			window.draw(**iProjectile);
 			if (outOfBounds(**iProjectile, window))
 			{
 				pPTemp = (*iProjectile);
-				Bullets.erase(iProjectile);
+				iProjectile = Bullets.erase(iProjectile);
 				delete pPTemp;
 			}
+			if (Bullets.size() != 0)
+			{
+				++iProjectile;
+			}
+		}
+		if (pDelay < dBuffer)
+		{
+			++pDelay;
 		}
 		
-		test.updataPos();
-		window.clear();
-		window.draw(test);
-		window.draw(player);
-		window.display();
+
 	}
 
 	return 0;
