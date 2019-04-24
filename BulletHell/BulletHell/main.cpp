@@ -11,7 +11,7 @@ int main()
 	vector<Projectile *> Bullets;
 	vector<Projectile *>::iterator iProjectile;
 	Projectile *pPTemp;
-
+	int pDelay = 0, dBuffer=20;
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 
@@ -59,7 +59,7 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (player.getPosition().x<(window.getSize().x))
+			if (player.getPosition().x<(window.getSize().x-40))
 			{
 				player.move(Vector2f(10, 0.f));
 			}
@@ -73,32 +73,39 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (player.getPosition().y<(window.getSize().y))
+			if (player.getPosition().y<(window.getSize().y-60))
 			{
 				player.move(Vector2f(0.f, 10));
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&& pDelay==dBuffer )
 		{
-			Projectile *nProj = new Projectile(5.f, sf::Color::Yellow, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, -5)));
+			Projectile *nProj = new Projectile(2.f, sf::Color::Yellow, *(new Vector2f(player.getPosition().x+16, player.getPosition().y)), true, *(new Vector2f(0, -12)));
 			Bullets.push_back(nProj);
+			pDelay = 0;
 		}
 		
 		// Bullet Movement Loop
-		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
+		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end();)
 		{
-			std::cout << "test2" << std::endl;
 			//gets the velocity of the given projectile and moves it
 			(*iProjectile)->move((*iProjectile)->getVelocity());
 			if (outOfBounds(**iProjectile, window))
 			{
-				std::cout << "Test1" << std::endl;
-
 				pPTemp = (*iProjectile);
 				iProjectile = Bullets.erase(iProjectile);
 				delete pPTemp;
 			}
+			if (Bullets.size() != 0)
+			{
+				++iProjectile;
+			}
 		}
+		if (pDelay < dBuffer)
+		{
+			++pDelay;
+		}
+		
 		 
 	}
 
