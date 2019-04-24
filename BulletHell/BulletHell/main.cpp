@@ -1,7 +1,7 @@
 
 //#include "PA9.h"
 #include "downEnemy.h"	
-
+#include <iostream>
 
 #include "PA9.h"
 	
@@ -14,6 +14,7 @@ int main()
 
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+	
 
 	sf::RenderWindow window(modes[0],"BulletHell",sf::Style::Fullscreen);
 	sf::Vector2f resolution( modes[0].width,modes[0].height);
@@ -30,6 +31,10 @@ int main()
 	player.setPosition(window.getSize().x / 2, window.getSize().y / 10);
 	player.setScale(.7, .7);
 	window.setFramerateLimit(60);
+
+	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y);
+	sf::Vector2f enemySize(window.getSize().x / 50, window.getSize().y / 50);
+	downEnemy test(enemyPos, enemySize, resolution);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -39,9 +44,7 @@ int main()
 				window.close();
 		}
 
-		window.clear();
-		window.draw(player);
-		window.display();
+		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
@@ -52,7 +55,7 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (player.getPosition().x<(window.getSize().x))
+			if (player.getPosition().x<(window.getSize().x - player.getLocalBounds().width))
 			{
 				player.move(Vector2f(20, 0.f));
 			}
@@ -66,7 +69,7 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (player.getPosition().y<(window.getSize().y))
+			if (player.getPosition().y<(window.getSize().y- player.getLocalBounds().height))
 			{
 				player.move(Vector2f(0.f, 20));
 			}
@@ -76,6 +79,7 @@ int main()
 			Projectile *nProj = new Projectile(5.f, sf::Color::White, *(new Vector2f(window.getSize().x / 2, window.getSize().y / 2)), true, *(new Vector2f(0, .0001)));
 			Bullets.push_back(nProj);
 		}
+
 		// Bullet Movement Loop
 		for ( iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
 		{
@@ -90,7 +94,12 @@ int main()
 				delete pPTemp;
 			}
 		}
-		 
+		
+		test.updataPos();
+		window.clear();
+		window.draw(test);
+		window.draw(player);
+		window.display();
 	}
 
 	return 0;
