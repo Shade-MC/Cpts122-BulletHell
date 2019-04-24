@@ -1,5 +1,5 @@
 //#include "PA9.h"
-#include "Projectile.h"	
+#include "downEnemy.h"	
 
 int main()
 {
@@ -9,8 +9,8 @@ int main()
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 
 	sf::RenderWindow window(modes[0],"BulletHell",sf::Style::Fullscreen);
-	int resHeight = modes[0].height, resWidth = modes[0].width;
-
+	sf::Vector2f resolution( modes[0].width,modes[0].height);
+	
 	sf::Texture texture;
 	if (!texture.loadFromFile("Galaga_Fighter.png"))
 		return EXIT_FAILURE;

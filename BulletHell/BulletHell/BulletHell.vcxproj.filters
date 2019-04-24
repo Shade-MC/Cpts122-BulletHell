@@ -24,6 +24,9 @@
     <ClCompile Include="PA9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="downEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PA9.h">
@@ -31,6 +34,12 @@
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="downEnemy.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
