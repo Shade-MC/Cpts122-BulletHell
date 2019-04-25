@@ -4,7 +4,10 @@ Mastermind::Mastermind(sf::RenderWindow &window) : window(window), squad() {
 	
 }
 void Mastermind::addEnemy(Enemy * newEnemy) {
-	squad.push_back(newEnemy);
+	if (newEnemy != nullptr)
+	{
+		squad.push_back(newEnemy);
+	}
 }
 void Mastermind::updatePositions() {
 	for (int i = 0; i < (int)squad.size(); ++i) {
@@ -25,7 +28,7 @@ void Mastermind::drawSuad() {
 }
 
 Enemy * createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size) {
-	int type = rand() % 1;
+	int type = rand() % 1+1;
 	Enemy * temp = nullptr;
 	sf::Vector2f position(rand() % (int) resolution.x, 0);
 

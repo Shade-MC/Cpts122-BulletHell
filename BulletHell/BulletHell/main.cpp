@@ -117,7 +117,8 @@ int main()
 			++pDelay;
 		}
 		//spawn enemies
-		if (rand() % 100 == 0) {
+		if (true) //(rand() % 100 == 0) 
+		{
 			mastermind.addEnemy(createRandomEnemy(resolution, enemySize));
 		}
 
