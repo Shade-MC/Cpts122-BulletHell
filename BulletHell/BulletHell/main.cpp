@@ -6,6 +6,7 @@
 
 int main()
 {
+	int Score = 0;
 	vector<Projectile *> Bullets;
 	vector<Projectile *>::iterator iProjectile;
 	Projectile *pPTemp;
@@ -104,7 +105,8 @@ int main()
 			if (!(*iProjectile)->getFriendly()) {
 				if (intersects(player, (**iProjectile))) {
 					window.close();
-					std::cout << "you have died" << std::endl;
+					std::cout << "You have died!" << std::endl;
+					std::cout << "Your Score: " << Score << std::endl;
 				}
 			}
 
@@ -127,7 +129,7 @@ int main()
 			mastermind.addEnemy(createRandomEnemy(resolution, enemySize, Bullets));
 		}
 		mastermind.updatePositions();
-		mastermind.enemyShot(Bullets);
+		mastermind.enemyShot(Bullets, &Score);
 
 	}
 

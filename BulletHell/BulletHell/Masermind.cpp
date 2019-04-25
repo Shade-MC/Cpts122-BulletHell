@@ -15,13 +15,13 @@ void Mastermind::updatePositions() {
 	for (int i = 0; i < (int)squad.size(); ++i) {
 		if (!outOfBounds(*squad[i], window)) {
 			(*squad[i]).updataPos();
-			if (rand() % 30 == 0) {
+			if (rand() % 60 == 0) {
 				sf::Vector2f playerTarget;
-				playerTarget.x = player->getPosition().x  -  squad[i]->getPosition().x;
-				playerTarget.y = squad[i]->getPosition().y - player->getPosition().y;
+				playerTarget.x =  player->getPosition().x -  squad[i]->getPosition().x;
+				playerTarget.y =   player->getPosition().y- squad[i]->getPosition().y;
 			 	double magnitude = sqrt(pow(player->getPosition().x ,2)+ pow(player->getPosition().y,2));
-				playerTarget.x = (playerTarget.x / magnitude);
-				playerTarget.y = (playerTarget.y / magnitude);
+				playerTarget.x = (playerTarget.x / magnitude)*5;
+				playerTarget.y = (playerTarget.y / magnitude)*5;
 				(*squad[i]).fireProjectile(playerTarget);
 			}
 
@@ -39,18 +39,19 @@ void Mastermind::drawSuad() {
 	}
 }
 
-void Mastermind::enemyShot(vector<Projectile *> &bullet) {
+void Mastermind::enemyShot(vector<Projectile *> &bullet, int *Score) {
 	vector<Projectile *>::iterator iProjectile;
 
 	for (int i = 0; i < (int)squad.size(); ++i) {
-		for (iProjectile = bullet.begin(); iProjectile != bullet.end();) {
+		for (iProjectile = bullet.begin(); iProjectile != bullet.end();++iProjectile) {
 			if ((*iProjectile)->getFriendly()) {
 				if (intersects(*squad[i], (**iProjectile))) {
 
 					Enemy *pTemp = (squad[i]);
 					squad.erase(squad.begin() + i);
 					delete pTemp;
-
+					*Score += 10;
+					break;
 				}
 			}
 

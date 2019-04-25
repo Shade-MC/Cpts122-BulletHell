@@ -5,7 +5,7 @@ class Mastermind {
 public:
 	Mastermind(sf::RenderWindow &window, sf::Sprite *player);
 	void addEnemy(Enemy * newEnemy);
-	void enemyShot(vector<Projectile *> &bullet);
+	void enemyShot(vector<Projectile *> &bullet, int *Score);
 	void updatePositions();
 	void drawSuad();
 private:

@@ -19,15 +19,16 @@ bool intersects(sf::Shape &shape, Projectile &proj)
 	yP2 = yP1 - proj.getGlobalBounds().height;
 
 
+
 	if (xP1 >= xS1 && xP1 <= xS2)
 	{
 		if (xP2 >= xS1 && xP2 <= xS2) {
 
-			if (yP1 >= yS1 && yP1 <= yS2) {
-
-				if (yP2 >= yS1 && yP2 <= yS2)
+			if (yP1 <= yS1 && yP1 >= yS2)
+			{
+				if (yP2 <= yS1 && yP2 >= yS2)
 				{
-					intersect = true;
+ 					intersect = true;
 				}
 
 			}
@@ -45,7 +46,7 @@ bool intersects(sf::Sprite &sprite, Projectile &proj)
 	xS1 = sprite.getPosition().x;
 	xS2 = sprite.getGlobalBounds().width + xS1;
 	yS1 = sprite.getPosition().y;
-	yS2 = yS1-sprite.getGlobalBounds().height;
+	yS2 = yS1 - sprite.getGlobalBounds().height;
 	float xP1 = 0, xP2 = 0, yP1 = 0, yP2 = 0;
 	xP1 = proj.getPosition().x;
 	xP2 = proj.getGlobalBounds().width + xP1;
