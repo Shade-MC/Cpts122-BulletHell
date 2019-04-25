@@ -127,6 +127,7 @@ int main()
 			mastermind.addEnemy(createRandomEnemy(resolution, enemySize, Bullets));
 		}
 		mastermind.updatePositions();
+		mastermind.enemyShot(Bullets);
 
 	}
 

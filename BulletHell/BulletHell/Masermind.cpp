@@ -39,6 +39,27 @@ void Mastermind::drawSuad() {
 	}
 }
 
+void Mastermind::enemyShot(vector<Projectile *> &bullet) {
+	vector<Projectile *>::iterator iProjectile;
+
+	for (int i = 0; i < (int)squad.size(); ++i) {
+		for (iProjectile = bullet.begin(); iProjectile != bullet.end();) {
+			if ((*iProjectile)->getFriendly()) {
+				if (intersects(*squad[i], (**iProjectile))) {
+
+					Enemy *pTemp = (squad[i]);
+					squad.erase(squad.begin() + i);
+					delete pTemp;
+
+				}
+			}
+
+
+		}
+
+	}
+}
+
 Enemy * createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size, vector<Projectile *> &bullets) {
 	int type = rand() % 1+1;
 	Enemy * temp = nullptr;
