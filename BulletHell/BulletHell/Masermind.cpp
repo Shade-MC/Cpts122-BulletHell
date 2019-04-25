@@ -1,7 +1,7 @@
 #include "Mastermind.h"
 
-Mastermind::Mastermind(sf::RenderWindow &window, sf::Vector2f *playerPos) : window(window), squad() {
-	this->playerPos = playerPos;
+Mastermind::Mastermind(sf::RenderWindow &window, sf::Sprite *player) : window(window), squad() {
+	this->player = player;
 }
 void Mastermind::addEnemy(Enemy * newEnemy) {
 	if (newEnemy != nullptr)
@@ -10,9 +10,21 @@ void Mastermind::addEnemy(Enemy * newEnemy) {
 	}
 }
 void Mastermind::updatePositions() {
+
+
 	for (int i = 0; i < (int)squad.size(); ++i) {
 		if (!outOfBounds(*squad[i], window)) {
 			(*squad[i]).updataPos();
+			if (rand() % 30 == 0) {
+				sf::Vector2f playerTarget;
+				playerTarget.x = player->getPosition().x  -  squad[i]->getPosition().x;
+				playerTarget.y = squad[i]->getPosition().y - player->getPosition().y;
+			 	double magnitude = sqrt(pow(player->getPosition().x ,2)+ pow(player->getPosition().y,2));
+				playerTarget.x = (playerTarget.x / magnitude);
+				playerTarget.y = (playerTarget.y / magnitude);
+				(*squad[i]).fireProjectile(playerTarget);
+			}
+
 		}
 		else {
 			Enemy *pTemp = (squad[i]);

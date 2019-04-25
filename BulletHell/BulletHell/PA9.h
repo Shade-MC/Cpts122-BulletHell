@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <time.h>
+#include <math.h>
 #include <stdlib.h>
 //#include "Projectile.h";
 using std::vector;

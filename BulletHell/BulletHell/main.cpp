@@ -34,7 +34,7 @@ int main()
 	window.setFramerateLimit(60);
 
 	sf::Vector2f enemySize(player.getGlobalBounds().width,player.getGlobalBounds().height);
-	Mastermind mastermind(window);
+	Mastermind mastermind(window, &player);
 	
 
 	srand(time(NULL));
@@ -119,7 +119,7 @@ int main()
 		//spawn enemies
 		if (rand() % 50 == 0) 
 		{
-			mastermind.addEnemy(createRandomEnemy(resolution, enemySize));
+			mastermind.addEnemy(createRandomEnemy(resolution, enemySize, Bullets));
 		}
 		mastermind.updatePositions();
 
