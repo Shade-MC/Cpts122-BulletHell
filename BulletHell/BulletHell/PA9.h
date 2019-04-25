@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <time.h>
+#include <stdlib.h>
 #include "Projectile.h";
 using std::vector;
 using sf::Vector2f;

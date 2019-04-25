@@ -1,10 +1,8 @@
 
-//#include "PA9.h"
+
 #include "downEnemy.h"	
 #include <iostream>
 
-#include "PA9.h"
-	
 
 int main()
 {
@@ -16,8 +14,8 @@ int main()
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 	
 
-	sf::RenderWindow window(modes[0],"BulletHell"/*,sf::Style::Fullscreen*/);
-	sf::Vector2f resolution( modes[0].width,modes[0].height);
+	sf::RenderWindow window(modes[1],"BulletHell",sf::Style::Fullscreen);
+	sf::Vector2f resolution( modes[1].width,modes[1].height);
 	
 	sf::Texture texture;
 	if (!texture.loadFromFile("Galaga_Fighter.png"))
@@ -36,8 +34,9 @@ int main()
 	window.setFramerateLimit(60);
 
 	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y /2);
-	sf::Vector2f enemySize(player.getLocalBounds().width,player.getLocalBounds().height);
-	downEnemy test(enemyPos, enemySize, resolution);
+	sf::Vector2f enemySize(player.getGlobalBounds().width,player.getGlobalBounds().height);
+	downEnemy  *test  = new downEnemy(enemyPos, enemySize, resolution);
+	srand(time(NULL));
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -49,7 +48,7 @@ int main()
 
 
 		window.clear();
-		window.draw(test);
+		window.draw(*test);
 		window.draw(player);
 		for (iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
 		{
@@ -57,7 +56,6 @@ int main()
 		}
 		window.display();
 		
-		test.updataPos();
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 #include "Projectile.h"
 
@@ -9,7 +10,7 @@ public:
 	}
 
 	void updataPos() {
-		this->setPosition(path[pos++]);
+		setPosition(path[pos++]);
 	}
 
 
