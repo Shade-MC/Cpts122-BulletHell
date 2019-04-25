@@ -117,11 +117,11 @@ int main()
 			++pDelay;
 		}
 		//spawn enemies
-		if (true) //(rand() % 100 == 0) 
+		if (rand() % 50 == 0) 
 		{
 			mastermind.addEnemy(createRandomEnemy(resolution, enemySize));
 		}
-
+		mastermind.updatePositions();
 
 	}
 

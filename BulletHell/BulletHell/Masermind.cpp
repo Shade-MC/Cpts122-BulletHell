@@ -1,7 +1,7 @@
 #include "Mastermind.h"
 
-Mastermind::Mastermind(sf::RenderWindow &window) : window(window), squad() {
-	
+Mastermind::Mastermind(sf::RenderWindow &window, sf::Vector2f *playerPos) : window(window), squad() {
+	this->playerPos = playerPos;
 }
 void Mastermind::addEnemy(Enemy * newEnemy) {
 	if (newEnemy != nullptr)
@@ -27,7 +27,7 @@ void Mastermind::drawSuad() {
 	}
 }
 
-Enemy * createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size) {
+Enemy * createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size, vector<Projectile *> &bullets) {
 	int type = rand() % 1+1;
 	Enemy * temp = nullptr;
 	sf::Vector2f position(rand() % (int) resolution.x, 0);
@@ -35,7 +35,7 @@ Enemy * createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size) {
 	switch (type)
 	{
 	case 1:
-		temp = (new downEnemy(position, size, resolution));
+		temp = (new downEnemy(position, size, resolution,bullets));
 
 		break;
 	}
