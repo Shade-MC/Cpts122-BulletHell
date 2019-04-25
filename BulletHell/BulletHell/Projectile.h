@@ -13,6 +13,9 @@ public:
 		velocity = nVelo;
 
 	}
+	bool getFriendly() {
+		return friendly;
+	}
 	sf::Vector2f &getVelocity();
 protected: 
 	bool friendly;

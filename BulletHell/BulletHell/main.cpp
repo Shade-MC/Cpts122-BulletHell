@@ -101,14 +101,19 @@ int main()
 		{
 			//gets the velocity of the given projectile and moves it
 			(*iProjectile)->move((*iProjectile)->getVelocity());
+			if (!(*iProjectile)->getFriendly()) {
+				if (intersects(player, (**iProjectile))) {
+					window.close();
+					std::cout << "you have died" << std::endl;
+				}
+			}
+
 			if (outOfBounds(**iProjectile, window))
 			{
 				pPTemp = (*iProjectile);
 				iProjectile = Bullets.erase(iProjectile);
 				delete pPTemp;
-			}
-			if (Bullets.size() != 0)
-			{
+			}else{
 				++iProjectile;
 			}
 		}
