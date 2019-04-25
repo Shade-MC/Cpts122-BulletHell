@@ -20,3 +20,6 @@ protected:
 	//true friendly/player projectile
 	//false enemy projectile
 };
+
+bool intersects(sf::Shape &shape, Projectile &proj);
+bool intersects(sf::Sprite &sprite, Projectile &proj);

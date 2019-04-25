@@ -7,7 +7,7 @@ void Mastermind::addEnemy(Enemy & newEnemy) {
 	squad.push_back(newEnemy);
 }
 void Mastermind::updatePositions() {
-	for (int i = 0; i < squad.size(); ++i) {
+	for (int i = 0; i < (int)squad.size(); ++i) {
 		if (!outOfBounds(squad[i], window)) {
 			squad[i].updataPos();
 		}

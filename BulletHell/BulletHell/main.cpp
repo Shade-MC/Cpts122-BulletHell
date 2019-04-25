@@ -1,6 +1,6 @@
 
 
-#include "downEnemy.h"	
+#include "Mastermind.h"
 #include <iostream>
 
 
@@ -33,9 +33,10 @@ int main()
 	player.setScale(.7, .7);
 	window.setFramerateLimit(60);
 
-	sf::Vector2f enemyPos(window.getSize().x / 2, window.getSize().y /2);
 	sf::Vector2f enemySize(player.getGlobalBounds().width,player.getGlobalBounds().height);
-	downEnemy  *test  = new downEnemy(enemyPos, enemySize, resolution);
+	Mastermind mastermind(window);
+	
+
 	srand(time(NULL));
 	while (window.isOpen())
 	{
@@ -48,7 +49,7 @@ int main()
 
 
 		window.clear();
-		window.draw(*test);
+		mastermind.drawSuad();
 		window.draw(player);
 		for (iProjectile = Bullets.begin(); iProjectile != Bullets.end(); ++iProjectile)
 		{
@@ -115,6 +116,11 @@ int main()
 		{
 			++pDelay;
 		}
+		//spawn enemies
+		if (rand() % 100 == 0) {
+			mastermind.addEnemy(createRandomEnemy(resolution, enemySize));
+		}
+
 
 	}
 

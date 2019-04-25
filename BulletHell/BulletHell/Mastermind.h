@@ -11,3 +11,4 @@ private:
 	sf::RenderWindow &window;
 	vector<Enemy&> squad;
 };
+Enemy & createRandomEnemy(sf::Vector2f resolution, sf::Vector2f size);
